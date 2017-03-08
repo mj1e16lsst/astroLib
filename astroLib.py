@@ -436,6 +436,18 @@ class SIMBADsrc(source):
         else:
             self.Vmag = -99
             self.VmagRef = 'Not found'
+            
+        #Hunt for the R magnitude and reference
+        term = 'flux: R (AB)'
+        loc1 = data.find(term)
+        if loc1 > -1:
+            loc2 = data.find('\n',loc1)
+            temp = data[loc1+len(term):loc2].split()
+            self.Rmag = float(temp[0])
+            #self.RmagRef = temp[-1]
+        else:
+            self.Rmag = -99
+            #self.RmagRef = 'Not found'
 
         #Hunt for the Spectral type and reference
         term = 'Spectral type:'
